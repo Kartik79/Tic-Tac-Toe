@@ -4,9 +4,10 @@ import Board from "./components/Board"
 import {calculateWinner} from "./winner"
 import History from './components/history'
 import StatusMessage from './components/StatusMessage'
+const NewGame=[{squares:Array(9).fill(null),isNext:false}]
 
 function App() {
-  const[history,setHistory]= useState([{squares:Array(9).fill(null),isNext:false}])
+  const[history,setHistory]= useState(NewGame)
   const[currentMove,setcurrentMove]=useState(0)
   const gamingboard=history[currentMove]
   const winner=calculateWinner(gamingboard.squares)
@@ -33,10 +34,15 @@ function App() {
   const moveTo=move=> {
     setcurrentMove(move)
   }
+  const onNewgamestart=()=> {
+    setHistory(NewGame)
+    setcurrentMove(0)
+  } 
   return (
       <div className='app'>
         <StatusMessage winner={winner} gamingboard={gamingboard}/>
         <Board squares={gamingboard.squares} handleSquareclick={handleSquareclick}/>  
+        <button type='button' className={`btn-reset ${currentMove!=0?'active':''}`} onClick={onNewgamestart}>GAME RESET</button>
         <h2>CURRENT GAME HISTORY</h2>
         <History history={history} moveTo={moveTo} currentMove={currentMove}/>
       </div>
