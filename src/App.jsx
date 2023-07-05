@@ -43,6 +43,7 @@ function App() {
         <h1>TIC <span className='text-green'>TAC</span> TOE</h1>
         <StatusMessage winner={winner} gamingboard={gamingboard}/>
         <Board squares={gamingboard.squares} handleSquareclick={handleSquareclick} winningSquare={winningSquare}/>  
+        <div className='bg-balls'></div>
         <button type='button' className={`btn-reset ${currentMove!=0?'active':''}`} onClick={onNewgamestart}>GAME RESET</button>
         <h2 style={{fontWeight:'normal'}}>Current Game History</h2>
         <History history={history} moveTo={moveTo} currentMove={currentMove}/>
